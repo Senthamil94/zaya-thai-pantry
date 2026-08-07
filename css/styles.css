@@ -506,13 +506,50 @@ body.has-pointer #glow{opacity:1}
   body{padding-bottom:0}
 }
 @media (max-width:760px){
-  .showcase,.showcase--full{aspect-ratio:auto;max-height:none;overflow:visible;border-radius:0}
-  .sc-slide{position:relative;inset:auto;display:none;opacity:1}
-  .sc-slide.on{display:block}
-  .sc-slide img{aspect-ratio:4/3;height:auto;transform:none;border-radius:0}
-  .sc-slide::after{display:none}
-  .sc-copy{position:relative;left:auto;bottom:auto;padding:22px var(--pad) 0;max-width:none}
-  .sc-nav{position:relative;right:auto;bottom:auto;margin:22px var(--pad) 0;justify-content:flex-start}
+  /* Keep slider copy + dots over the image (same as desktop), not stacked below */
+  .showcase,.showcase--full{
+    aspect-ratio:4/5;
+    max-height:min(78svh,640px);
+    overflow:hidden;
+    border-radius:0;
+  }
+  .sc-slide{
+    position:absolute;
+    inset:0;
+    display:block;
+    opacity:0;
+  }
+  .sc-slide.on{opacity:1}
+  .sc-slide img{
+    aspect-ratio:auto;
+    height:100%;
+    width:100%;
+    object-fit:cover;
+    transform:scale(1.06);
+    border-radius:0;
+  }
+  .sc-slide.on img{transform:scale(1)}
+  .sc-slide::after{
+    display:block;
+    background:linear-gradient(180deg,rgba(11,15,13,.15) 20%,rgba(11,15,13,.88) 78%);
+  }
+  .sc-copy{
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    padding:22px var(--pad) 58px;
+    max-width:none;
+  }
+  .sc-copy h3{font-size:clamp(28px,9vw,42px)}
+  .sc-nav{
+    position:absolute;
+    left:var(--pad);
+    right:var(--pad);
+    bottom:18px;
+    margin:0;
+    justify-content:flex-start;
+  }
 }
 @media (max-width:680px){
   .gal{grid-template-columns:repeat(2,1fr)}
