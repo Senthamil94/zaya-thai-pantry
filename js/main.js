@@ -236,7 +236,7 @@ const MENU_NOTES = {
 })();
 
 /* ============================================================
-   5. HERO — embers, sound toggle, live open/closed status
+   5. HERO — embers, live open/closed status
    ============================================================ */
 (function(){
   const c=$("#embers"); if(!c) return;
@@ -258,16 +258,6 @@ const MENU_NOTES = {
     }
     init(); tick(); addEventListener("resize",init);
   }
-
-  const vid=$("#heroVid"), btn=$("#sndBtn");
-  btn.addEventListener("click",()=>{
-    vid.muted=!vid.muted;
-    btn.setAttribute("aria-label", vid.muted? "Turn video sound on":"Turn video sound off");
-    btn.innerHTML = vid.muted
-      ? '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M22 9l-6 6M16 9l6 6"/></svg>'
-      : '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
-    if(!vid.muted) vid.play().catch(()=>{});
-  });
 
   // Live status, computed in Pacific Time from the real posted hours
   const SERVICE=[{o:11.5,c:14.5,n:"Lunch"},{o:17,c:21,n:"Dinner"}];
@@ -666,10 +656,10 @@ const Menu = (function(){
     });
   }
 
-  // subtle parallax on the hero video
+  // subtle parallax on the hero image
   if(!RM){
-    const v=$("#heroVid");
-    addEventListener("scroll",()=>{
+    const v=$("#heroImg");
+    if(v) addEventListener("scroll",()=>{
       const y=window.scrollY;
       if(y<window.innerHeight){const o=Math.min(y*.14, window.innerHeight*.05);v.style.transform=`translateY(${o}px) scale(1.12)`;}
     },{passive:true});
