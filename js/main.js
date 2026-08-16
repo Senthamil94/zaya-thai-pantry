@@ -554,6 +554,7 @@ const Menu = (function(){
     `<a href="${src}" data-i="${i}" aria-label="Open photo: ${cap}"><img src="${src}" alt="${cap}" loading="lazy"><span class="cap">${cap}</span></a>`).join("");
 
   const lb=$("#lb"), img=$("#lbImg"), cap=$("#lbCap");
+  document.documentElement.appendChild(lb);
   let cur=0, opener=null;
   function open(i){
     cur=(i+G.length)%G.length;

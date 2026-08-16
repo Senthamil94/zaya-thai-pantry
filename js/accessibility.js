@@ -55,19 +55,18 @@
   function buildFilter() {
     var parts = [];
     if (state.grayscale) parts.push('grayscale(100%)');
-    parts.push('saturate(' + state.saturation + '%)');
-    parts.push('brightness(' + state.brightness + '%)');
+    if (state.saturation !== 100) parts.push('saturate(' + state.saturation + '%)');
+    if (state.brightness !== 100) parts.push('brightness(' + state.brightness + '%)');
     return parts.join(' ');
   }
 
   function applySettings() {
-    /* Use px-based root size so all rem units scale reliably. */
-    var basePx = 16;
-    root.style.fontSize = (basePx * state.textScale / 100) + 'px';
+    var scale = state.textScale / 100;
+    root.style.setProperty('--a11y-text-scale', String(scale));
     root.classList.toggle('a11y-text-scaled', state.textScale !== 100);
     root.dataset.a11yTextScale = state.textScale;
 
-    /* Apply visual filters to body so widget UI stays crisp */
+    /* Only set a real filter. An identity filter still traps position:fixed (lightbox). */
     document.body.style.filter = buildFilter();
 
     toggleClass('a11y-high-contrast', state.highContrast);
@@ -98,6 +97,7 @@
       state.stopAnimations = true;
     }
     root.style.fontSize = '';
+    root.style.removeProperty('--a11y-text-scale');
     root.classList.remove('a11y-text-scaled');
     delete root.dataset.a11yTextScale;
     document.body.style.filter = '';

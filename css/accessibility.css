@@ -13,6 +13,22 @@
   pointer-events: none;
 }
 
+/*
+  Site type uses px / clamp() / vw, so html font-size alone does not scale copy.
+  Zoom the page (widget lives on <html>, so it stays the same size).
+*/
+html.a11y-text-scaled body {
+  zoom: var(--a11y-text-scale, 1);
+}
+
+@supports not (zoom: 1) {
+  html.a11y-text-scaled body {
+    transform: scale(var(--a11y-text-scale, 1));
+    transform-origin: top left;
+    width: calc(100% / var(--a11y-text-scale, 1));
+  }
+}
+
 .a11y-widget-trigger {
   pointer-events: auto;
   width: 52px;

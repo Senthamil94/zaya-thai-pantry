@@ -355,9 +355,9 @@ body.has-pointer #glow{opacity:1}
 .gal a:hover .cap{opacity:1;transform:none}
 
 /* lightbox */
-.lb{position:fixed;inset:0;z-index:150;background:rgba(6,9,8,.96);backdrop-filter:blur(10px);
-  display:grid;place-items:center;opacity:0;visibility:hidden;transition:.45s var(--ease)}
-.lb.on{opacity:1;visibility:visible}
+.lb{position:fixed;inset:0;z-index:400;background:rgba(6,9,8,.96);backdrop-filter:blur(10px);
+  display:grid;place-items:center;opacity:0;visibility:hidden;pointer-events:none;transition:.45s var(--ease)}
+.lb.on{opacity:1;visibility:visible;pointer-events:auto}
 .lb img{width:auto;height:auto;max-width:min(92vw,1150px);max-height:80svh;object-fit:contain;border-radius:3px;transform:scale(.94);transition:transform .5s var(--ease)}
 .lb.on img{transform:scale(1)}
 .lb-cap{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);font-family:var(--ui);font-size:11px;
