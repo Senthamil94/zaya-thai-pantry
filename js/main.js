@@ -411,58 +411,7 @@ const MENU_NOTES = {
 })();
 
 /* ============================================================
-   8. TABLE BUILDER
-   ============================================================ */
-const Table = (function(){
-  const items=new Map();
-  const tray=$("#tray"), bd=$("#trayBd"), n=$("#trayN"),
-        sub=$("#tSub"), tax=$("#tTax"), each=$("#tEach"), ppl=$("#ppl");
-  const TAX=0.0875;
-
-  function has(id){return items.has(id);}
-  function add(id,it){
-    if(!it||it.p==null) return;
-    const cur=items.get(id);
-    items.set(id, cur? {...cur,q:cur.q+1} : {n:it.n, p:it.p, q:1});
-    draw(); tray.classList.add("up"); tray.classList.remove("min");
-  }
-  function bump(id,d){
-    const cur=items.get(id); if(!cur) return;
-    const q=cur.q+d;
-    if(q<=0){items.delete(id); const el=$(`.dish[data-id="${CSS.escape(id)}"]`);
-      if(el){el.classList.remove("added"); const a=$(".add",el); if(a)a.textContent="+";}}
-    else items.set(id,{...cur,q});
-    draw();
-    if(!items.size) tray.classList.remove("up");
-  }
-  function draw(){
-    n.textContent=[...items.values()].reduce((a,b)=>a+b.q,0);
-    bd.innerHTML = items.size
-      ? [...items].map(([id,v])=>`<div class="tray-row">
-          <span class="nm">${v.n}</span>
-          <span class="qty"><button data-b="${id}" data-d="-1" aria-label="Remove one ${v.n}">−</button><span>${v.q}</span><button data-b="${id}" data-d="1" aria-label="Add one ${v.n}">+</button></span>
-          <span class="pr">${money(v.p*v.q)}</span>
-        </div>`).join("")
-      : `<p class="tray-empty">Tap the + on any dish and we'll build the bill as you go.</p>`;
-    const s=[...items.values()].reduce((a,b)=>a+b.p*b.q,0);
-    const t=s*TAX, per=Math.max(1,parseInt(ppl.value)||1);
-    sub.textContent=money(s); tax.textContent=money(t); each.textContent=money((s+t)/per);
-  }
-  bd.addEventListener("click",e=>{const b=e.target.closest("[data-b]"); if(b) bump(b.dataset.b,+b.dataset.d);});
-  ppl.addEventListener("input",draw);
-  $("#trayHd").addEventListener("click",()=>tray.classList.toggle("min"));
-  $("#trayHd").addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();tray.classList.toggle("min");}});
-  $("#trayClear").addEventListener("click",()=>{
-    items.clear(); draw(); tray.classList.remove("up");
-    $$(".dish.added").forEach(d=>{d.classList.remove("added"); const a=$(".add",d); if(a)a.textContent="+";});
-  });
-  draw();
-  return {add,has};
-})();
-window.Table=Table;
-
-/* ============================================================
-   9. MENU RENDER + FILTERS
+   8. MENU RENDER + FILTERS
    ============================================================ */
 const Menu = (function(){
   let active="main", cat="All", q="", fGf=false, fSp=false, fVg=false;
@@ -473,8 +422,7 @@ const Menu = (function(){
 
   function card(it,i){
     const id = active+"|"+it.c+"|"+it.n;
-    const inTray = Table.has(id);
-    return `<article class="dish${inTray?" added":""}" data-id="${id}" style="--i:${i}">
+    return `<article class="dish" data-id="${id}" style="--i:${i}">
       ${it.img?`<img class="dish-thumb" src="${it.img}" alt="" loading="lazy" aria-hidden="true">`:""}
       <div class="dish-top">
         <h4>${it.n}</h4>
@@ -487,7 +435,6 @@ const Menu = (function(){
         ${it.gf?'<span class="tag gf">Gluten-free</span>':""}
         ${it.v?'<span class="tag">Veg option</span>':""}
         ${it.s?`<span class="tag spicy">Chili ${heat(it.s)}</span>`:""}
-        ${it.p!=null?`<button class="add" data-add="${id}" aria-label="Add ${it.n} to your table">${inTray?"✓":"+"}</button>`:""}
       </div>
     </article>`;
   }
@@ -533,14 +480,6 @@ const Menu = (function(){
   search.addEventListener("input",()=>{q=search.value.trim(); render();});
   const tog=(el,set)=>el.addEventListener("click",()=>{el.classList.toggle("on");set(el.classList.contains("on"));render();});
   tog($("#tgGf"),v=>fGf=v); tog($("#tgSpicy"),v=>fSp=v); tog($("#tgVeg"),v=>fVg=v);
-
-  grid.addEventListener("click",e=>{
-    const b=e.target.closest("[data-add]"); if(!b) return;
-    const [m,c,n]=b.dataset.add.split("|");
-    const it=MENUS[m].find(x=>x.c===c&&x.n===n);
-    Table.add(b.dataset.add,it);
-    b.closest(".dish").classList.add("added"); b.textContent="✓";
-  });
 
   renderCats(); render();
   return {render};

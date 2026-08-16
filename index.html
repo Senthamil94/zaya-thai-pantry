@@ -23,6 +23,7 @@
 <link rel="preconnect" href="https://static.spotapps.co">
 <link rel="preconnect" href="https://cdn.spotapps.co">
 <link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Newsreader:ital,opsz,wght@1,6..72,300;1,6..72,400&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Azeret+Mono:wght@400;500&family=Bai+Jamjuree:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
 
 <script type="application/ld+json">
 {
@@ -47,6 +48,7 @@
 }
 </script>
 <link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/accessibility.css">
 </head>
 <body>
 
@@ -533,36 +535,22 @@
           <li><a href="https://tmt.spotapps.co/job-listings?spot_id=351016&callback_url=http://zayathai.com/" target="_blank" rel="noopener">Work with us</a></li>
         </ul>
       </div>
+      <div>
+        <h5>Legal</h5>
+        <ul>
+          <li><a href="https://www.boons.io/terms-of-service" target="_blank" rel="noopener">Terms</a></li>
+          <li><a href="https://www.boons.io/privacy-policy" target="_blank" rel="noopener">Privacy policy</a></li>
+          <li><a href="https://www.boons.io/accessibility-statement" target="_blank" rel="noopener">Accessibility</a></li>
+        </ul>
+      </div>
     </div>
     <div class="foot-btm">
-      <span>© <span id="yr"></span> Zaya Thai Pantry</span>
-      <span><a href="https://zayathai.com/accessibility-page-01" target="_blank" rel="noopener">Accessibility</a> · <a href="#top">Back to top ↑</a></span>
+      <span>© <span id="yr"></span> Zaya Thai Pantry · All rights reserved</span>
+      <span class="powered-by">Powered by <a href="https://www.boons.io/" target="_blank" rel="noopener" aria-label="boons"><img src="images/boons-logo.png" alt="boons"></a></span>
     </div>
   </div>
 </footer>
 </main>
-
-<!-- ======================= TABLE BUILDER ======================= -->
-<aside class="tray" id="tray" aria-label="Your table">
-  <div class="tray-hd" id="trayHd" role="button" tabindex="0" aria-expanded="true">
-    <h4>Your table</h4>
-    <span class="n" id="trayN">0</span>
-    <span class="cv">▾</span>
-  </div>
-  <div class="tray-bd" id="trayBd"></div>
-  <div class="tray-ft" id="trayFt">
-    <div class="split">
-      <label for="ppl">Splitting between</label>
-      <input type="number" id="ppl" min="1" max="30" value="2">
-      <span>people</span>
-    </div>
-    <div class="tray-line"><span>Subtotal</span><span id="tSub">$0.00</span></div>
-    <div class="tray-line"><span>Est. tax (8.75%)</span><span id="tTax">$0.00</span></div>
-    <div class="tray-line tot"><span>Each person</span><b id="tEach">$0.00</b></div>
-    <a class="btn" id="trayGo" href="https://order.boons.io/site/zaya-thai-pantry/255/y" target="_blank" rel="noopener">Order this for real <span class="ar">→</span></a>
-    <button class="link-u" id="trayClear" style="margin-top:14px">Clear the table</button>
-  </div>
-</aside>
 
 <!-- ======================= LIGHTBOX ======================= -->
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer">
@@ -581,6 +569,7 @@
 </nav>
 
 <script src="js/main.js" defer></script>
+<script src="js/accessibility.js" defer></script>
 </body>
 </html>
 
