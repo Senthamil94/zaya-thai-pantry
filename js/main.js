@@ -161,7 +161,7 @@ catering:[
 ]};
 
 const MENU_NOTES = {
-  main:"GF marks gluten-free preparations · Lunch 11:30–2:30, dinner 5:00–9:00, Tuesday to Sunday · Prices subject to change — call (925) 567-9292 to confirm.",
+  main:"GF marks gluten-free preparations · Lunch 11:30–2:30, dinner 5:00–9:00, Tuesday to Sunday · Prices subject to change — call +1 925-567-9292 to confirm.",
   lunch:"Lunch special served Tuesday to Friday, 11:30 AM – 2:30 PM.",
   catering:"Catering orders are placed through our catering portal. Vegetarian options available across the menu."
 };
