@@ -545,10 +545,7 @@ const Menu = (function(){
     [IMG.tomyum,"Tom yum"],
     [IMG.crab,"Crab fried rice"],
     [IMG.currypuffs,"Curry puffs"],
-    [IMG.satay,"Chicken satay"],
-    [IMG.coconut,"Coconut dessert"],
-    [IMG.toast,"Honey toast"],
-    [IMG.thaicake,"Thai tea cake"]
+    [IMG.satay,"Chicken satay"]
   ];
   $("#gal").innerHTML=G.map(([src,cap],i)=>
     `<a href="${src}" data-i="${i}" aria-label="Open photo: ${cap}"><img src="${src}" alt="${cap}" loading="lazy"><span class="cap">${cap}</span></a>`).join("");
