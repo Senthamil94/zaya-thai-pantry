@@ -161,8 +161,8 @@ catering:[
 ]};
 
 const MENU_NOTES = {
-  main:"GF marks gluten-free preparations · Lunch 11:30–2:30, dinner 5:00–9:00, Tuesday to Sunday · Prices subject to change — call +1 925-567-9292 to confirm.",
-  lunch:"Lunch special served Tuesday to Friday, 11:30 AM – 2:30 PM.",
+  main:"GF marks gluten-free preparations · Lunch 11:30–2:30, dinner 5:00–9:00, Wednesday to Sunday · Prices subject to change — call +1 925-567-9292 to confirm.",
+  lunch:"Lunch special served Wednesday to Friday, 11:30 AM – 2:30 PM.",
   catering:"Catering orders are placed through our catering portal. Vegetarian options available across the menu."
 };
 
@@ -303,16 +303,16 @@ const MENU_NOTES = {
   const pills=$$(".js-status"), txts=$$(".js-status-txt");
   function update(){
     const {day,hrs}=pacific();
-    const open = day!==1;
+    const open = day!==1 && day!==2;
     let msg="", shut=true;
     if(open){
       const live=SERVICE.find(s=>hrs>=s.o&&hrs<s.c);
       if(live){shut=false;msg=`Open now · ${live.n} until ${fmt(live.c)}`;}
       else{
         const next=SERVICE.find(s=>hrs<s.o);
-        msg = next ? `Closed · ${next.n} opens ${fmt(next.o)}` : "Closed · reopens tomorrow at 11:30 AM";
+        msg = next ? `Closed · ${next.n} opens ${fmt(next.o)}` : (day===0 ? "Closed · reopens Wednesday at 11:30 AM" : "Closed · reopens tomorrow at 11:30 AM");
       }
-    } else msg="Closed Mondays · reopens Tuesday 11:30 AM";
+    } else msg="Closed Mondays & Tuesdays · reopens Wednesday 11:30 AM";
     txts.forEach(t=>t.textContent=msg);
     pills.forEach(p=>p.classList.toggle("shut",shut));
     // highlight today's row in the hours table
@@ -321,7 +321,7 @@ const MENU_NOTES = {
   // hours table
   const hl=$("#hoursList");
   if(hl){
-    const rows=[[1,"Monday","Closed"],[2,"Tuesday","11:30–2:30 · 5:00–9:00"],[3,"Wednesday","11:30–2:30 · 5:00–9:00"],
+    const rows=[[1,"Monday","Closed"],[2,"Tuesday","Closed"],[3,"Wednesday","11:30–2:30 · 5:00–9:00"],
       [4,"Thursday","11:30–2:30 · 5:00–9:00"],[5,"Friday","11:30–2:30 · 5:00–9:00"],
       [6,"Saturday","11:30–2:30 · 5:00–9:00"],[0,"Sunday","11:30–2:30 · 5:00–9:00"]];
     hl.innerHTML=rows.map(r=>`<li data-day="${r[0]}"><span>${r[1]}</span><span>${r[2]}</span></li>`).join("");
