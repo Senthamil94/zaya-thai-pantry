@@ -6,7 +6,8 @@
 .a11y-widget-root {
   position: fixed;
   bottom: 20px;
-  left: 20px;
+  right: 20px;
+  left: auto;
   z-index: 9999;
   font-family: Arial, Verdana, sans-serif;
   font-size: 16px !important;
@@ -64,7 +65,8 @@ html.a11y-text-scaled body {
   display: none;
   position: absolute;
   bottom: calc(100% + 12px);
-  left: 0;
+  right: 0;
+  left: auto;
   width: min(320px, calc(100vw - 40px));
   max-height: min(70vh, 520px);
   overflow-y: auto;
@@ -364,14 +366,24 @@ html.a11y-enhanced-focus :focus-visible {
 
 @media (max-width: 900px) {
   .a11y-widget-root {
+    top: auto;
+    right: 12px;
     bottom: calc(78px + env(safe-area-inset-bottom));
-    left: 16px;
+    left: auto;
+  }
+
+  .a11y-widget-panel {
+    top: auto;
+    right: 0;
+    bottom: calc(100% + 12px);
+    left: auto;
   }
 }
 
 @media (max-width: 480px) {
   .a11y-widget-root {
-    left: 12px;
+    right: 12px;
+    left: auto;
   }
 
   .a11y-widget-trigger {
