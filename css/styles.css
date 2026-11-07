@@ -521,6 +521,14 @@ body.has-pointer #glow{opacity:1}
     justify-content:flex-start;
   }
 }
+/* ---------- Promo flyer ---------- */
+#flyer{position:fixed;inset:0;z-index:9000;background:rgba(6,9,8,.78);display:none;align-items:center;justify-content:center;padding:28px 18px}
+#flyer.on{display:flex}
+.flyer-card{position:relative;width:min(92vw,480px)}
+.flyer-card img{width:100%;height:auto;border-radius:18px;box-shadow:0 24px 70px rgba(0,0,0,.45)}
+#flyer-close{position:absolute;top:-14px;right:-14px;width:40px;height:40px;border-radius:50%;background:var(--chili);color:var(--rice);font-size:26px;line-height:1;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(0,0,0,.35)}
+#flyer-close:hover{background:var(--brass);color:var(--ink)}
+
 @media (max-width:680px){
   .gal{grid-template-columns:repeat(2,1fr)}
   .gal a:nth-child(1),.gal a:nth-child(8){grid-column:span 2;grid-row:span 1;aspect-ratio:16/10}

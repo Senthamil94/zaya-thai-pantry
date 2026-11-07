@@ -182,6 +182,7 @@ const MENU_NOTES = {
     document.body.classList.add("ready");
     $("#hero").classList.add("go");
     $("#heroTitle").classList.add("go");
+    if(typeof openFlyer==="function") openFlyer();
   }
   setTimeout(()=>{if(!pre.classList.contains("done")){clearInterval(t);done();}},4200);
 })();
@@ -648,5 +649,30 @@ const Menu = (function(){
     });
   });
 })();
+
+/* ============================================================
+   15. PROMO FLYER
+   Set FLYER_ENABLED to false to hide it without removing the image.
+   ============================================================ */
+const FLYER_ENABLED = true;
+function closeFlyer(){
+  const flyer=$("#flyer");
+  if(!flyer) return;
+  flyer.classList.remove("on");
+  flyer.hidden=true;
+  if(!$("#lb").classList.contains("on")) document.body.classList.remove("locked");
+}
+function openFlyer(){
+  const flyer=$("#flyer");
+  if(!flyer||!FLYER_ENABLED) return;
+  flyer.hidden=false;
+  flyer.classList.add("on");
+  document.body.classList.add("locked");
+}
+const flyerClose=$("#flyer-close");
+if(flyerClose) flyerClose.addEventListener("click",closeFlyer);
+const flyerEl=$("#flyer");
+if(flyerEl) flyerEl.addEventListener("click",e=>{ if(e.target===flyerEl) closeFlyer(); });
+addEventListener("keydown",e=>{ if(e.key==="Escape") closeFlyer(); });
 
 })();
