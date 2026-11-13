@@ -654,7 +654,7 @@ const Menu = (function(){
    15. PROMO FLYER
    Set FLYER_ENABLED to false to hide it without removing the image.
    ============================================================ */
-const FLYER_ENABLED = false;
+const FLYER_ENABLED = true;
 function closeFlyer(){
   const flyer=$("#flyer");
   if(!flyer) return;
